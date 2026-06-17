@@ -34,7 +34,37 @@ A utility script used to generate a static snapshot of data.
 
 ---
 
-## 2. System Connection (Frontend ↔ Backend)
+## 2. Python Technical Terminology (Programming Concepts)
+
+The backend uses several specific Python and Data Science concepts to function. Here is a breakdown of the terms found in the code:
+
+### Core Python
+*   **`class` (e.g., `DataProcessor`)**: A blueprint for creating objects. It groups data and functions together.
+*   **`def __init__(self, ...)` (Constructor)**: A special method that runs automatically when a class is created. It sets up the initial variables (like the company name).
+*   **`self`**: A keyword that refers to the specific instance of the class. It allows methods to access variables belonging to that class.
+*   **`import ... as ...`**: Used to bring in external libraries. We use `pd` for Pandas and `np` for NumPy to make the code shorter.
+*   **`if __name__ == "__main__":`**: A safety check that ensures the code only runs if the file is executed directly, not if it's imported by another file.
+*   **`try...except`**: Error handling. It "tries" to run a block of code and "catches" any errors (like a missing file) so the whole server doesn't crash.
+*   **`json.dumps()` & `json.load()`**: **Serialization**. This converts Python dictionaries into a string format (JSON) that the JavaScript frontend can understand.
+*   **`with open(...) as f:` (Context Manager)**: A safe way to handle files. It automatically closes the file after reading or writing, even if an error occurs.
+
+### Data Processing (Pandas & NumPy)
+*   **`DataFrame` (`df`)**: The primary data structure in Pandas. Think of it as a super-powered Excel spreadsheet inside the code.
+*   **`pd.read_csv()`**: The function used to "ingest" or load the data from your `.csv` files into a DataFrame.
+*   **`df.drop_duplicates()`**: A cleaning function that finds and removes identical rows.
+*   **`df.fillna()`**: A method to handle missing data. We use it to replace `NaN` (Not a Number/Empty) values with the median of the column.
+*   **`df.loc[]`**: Used for "Label-based indexing." It allows us to select specific rows or columns based on conditions (e.g., `revenue > 100`).
+*   **`df.quantile()`**: A statistical function used to find the "percentiles" of data, helping us identify and cap extreme outliers.
+
+### Web & API (`api.py`)
+*   **`BaseHTTPRequestHandler`**: A standard Python tool we "extend" to define how our server should react when a browser asks for data.
+*   **`do_GET`**: An **Overridden Method**. It specifically tells the server: "When a GET request (data request) comes in, run this specific logic."
+*   **`urlparse` & `parse_qs`**: Tools to "dissect" the website address. They pull the `?company=spacex` part out of the URL so we know which data to fetch.
+*   **`encode('utf-8')`**: Converts the text data into **binary format** (bytes) so it can be sent over the internet.
+
+---
+
+## 3. System Connection (Frontend ↔ Backend)
 
 Axiom uses a **Decoupled Architecture**:
 
