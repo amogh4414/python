@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Geist", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-serif: "Newsreader", "Playfair Display", "Georgia", serif;
+
+  --color-background: #FDFDFB; /* Warm paper */
+  --color-surface: #FFFFFF; /* Pure white for contrast areas */
+  --color-foreground: #222222; /* Soft graphite */
+  --color-muted: #737373; /* Muted reading text */
+  --color-border: #E8E8E3; /* Very subtle borders */
+  --color-primary: #1E293B; /* Muted Navy */
+  --color-primary-foreground: #FFFFFF;
+  --color-accent: #9C8968; /* Restrained Gold/Sand */
+  --color-success: #366B4E; /* Subtle green */
+  --color-warning: #A86B2D; /* Muted amber */
+  --color-danger: #8C332B; /* Restrained red */
+  
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0; /* Remove rounded corners for editorial feel */
+
+  --shadow-sm: none;
+  --shadow-md: none;
+}
+
+@layer base {
+  :root {
+    --background: #FDFDFB;
+    --surface: #FFFFFF;
+    --foreground: #222222;
+    --muted: #737373;
+    --border: #E8E8E3;
+    --primary: #1E293B;
+    --accent: #9C8968;
+  }
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    color: #111111;
+    letter-spacing: -0.015em;
+  }
+  
+  /* Force tabular numbers globally for quantitative data */
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Base UI animations - smooth and elegant */
+.animate-in {
+  animation: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Smooth transitions for interactive elements */
+a, button, input[type="range"] {
+  transition: all 0.2s ease-in-out;
+}
